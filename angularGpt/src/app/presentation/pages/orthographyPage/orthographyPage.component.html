@@ -8,8 +8,10 @@
 
       @for (message of messages(); track $index) {
         @if ( message.isGpt ) {
-          <app-chat-message
+          <app-gpt-message-orthography
             [text]="message.text"
+            [errors]="message.info!.errors"
+            [userScore]="message.info!.userScore"
           />
         } @else {
           <app-my-message
@@ -29,20 +31,10 @@
 
   <!-- Messasage Box-->
   <!-- cuando se emita el onMessage voy a llamr un metodo llamado handleMessage -->
-  <!-- <app-text-message-box
+  <app-text-message-box
     placeholder="Escribe aqui lo que deseas"
     (onMessage)="handleMessage($event)"
-  /> -->
-
-  <!-- <app-text-message-box-file
-    placeholder="Escribe aqui lo que deseas"
-    (onMessage)="handleMessageWithFile($event)"
-  /> -->
-
-  <app-text-message-box-select
-    placeholder="Escribe aqui lo que deseas"
-    [options]="[{ id: '1', text: '1'}, { id: '2', text: '2'}]"
-    (onMessage)="handleMessageWithSelect($event)"
+    [disableCorrection]="true"
   />
 
 
