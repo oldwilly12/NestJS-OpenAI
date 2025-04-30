@@ -29,7 +29,7 @@ export class GptController {
   ){
     const stream = await this.gptService.prosConsDicusserStream(prosConsDiscusserDto);
 
-    // stream de informacion
+    // stream de informacion application/json  text/plain
     res.setHeader('Content-Type', 'application/json');
     res.status( HttpStatus.OK );
 
