@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { orthographyCheckUseCase, prosConsDicusserStreamUseCase, prosConsDicusserUseCase, textToAudioUseCase } from './use-cases';
+import { getAudioUseCase, orthographyCheckUseCase, prosConsDicusserStreamUseCase, prosConsDicusserUseCase, textToAudioUseCase } from './use-cases';
 import { OrthographyDto, ProsConsDiscusserDto, TextToAudioDto } from './dtos';
 import OpenAI from 'openai';
 import { translateUseCase } from './use-cases/translate.use-case';
@@ -37,11 +37,8 @@ export class GptService {
         return await textToAudioUseCase( this.openai, { prompt, voice } );
     }
 
-    getFilePath( filePath: string ){
-        const folderPath = path.resolve(__dirname, '../../generated/audios');
-
-        
-        return  path.resolve( `${folderPath}/${filePath}.mp3` );
+    getFilePath( fileId: string ){
+        return getAudioUseCase( fileId )
     }
 
 }

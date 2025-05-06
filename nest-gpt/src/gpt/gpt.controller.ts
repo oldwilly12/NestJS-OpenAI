@@ -76,8 +76,11 @@ export class GptController {
       @Res() res: Response
   ){
 
-    // const filePath = this.gptService.getFilePath(fileId);
+    const filePath = this.gptService.getFilePath(fileId);
 
+    res.setHeader('Content-Type', 'audio/mp3');
+    res.status( HttpStatus.OK);
+    res.sendFile(filePath);
 
   //   const filePath = await this.gptService.textToAudio( textToAudioDto );
 
