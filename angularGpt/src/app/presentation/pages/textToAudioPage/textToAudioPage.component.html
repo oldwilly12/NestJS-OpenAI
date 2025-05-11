@@ -1,1 +1,40 @@
-<p>textToAudioPage works!</p>
+<div class= "chat-container">
+  <div class="chat-messages">
+    <div class="grid gap-y-2">
+      <!-- Messages-->
+      <app-chat-message
+        text="Escribe el texto que quieres que revise"
+      />
+
+      @for (message of messages(); track $index) {
+        @if ( message.isGpt ) {
+          <app-chat-message
+            [text]="message.text"
+            [audioUrl]="message.audioUrl"
+          />
+        } @else {
+          <app-my-message
+            [text]="message.text"
+          />
+        }
+
+      }
+
+      @if (isLoading()) {
+        <app-typing-loader />
+      }
+
+    </div>
+
+  </div>
+
+  <!-- Messasage Box-->
+  <!-- cuando se emita el onMessage voy a llamr un metodo llamado handleMessage -->
+  <app-text-message-box-select
+  [options]="voices()"
+    placeholder="Escribe aqui lo que deseas"
+    (onMessage)="handleMessageWithSelect($event)"
+  />
+
+
+</div>
